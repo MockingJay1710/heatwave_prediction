@@ -1,0 +1,336 @@
+{
+  "source": "https://archive-api.open-meteo.com/v1/archive",
+  "model": "era5",
+  "timezone": "UTC",
+  "elevation": "nan (no elevation downscaling)",
+  "retrieved_at_utc": "2026-11-21T19:46:31.097239+00:00",
+  "protocol": {
+    "version": 1,
+    "start_date": "2024-01-01",
+    "end_date": "2026-09-23",
+    "timezone": "UTC",
+    "issue_hour_utc": 0,
+    "target": "maximum hourly 2m temperature over the UTC day starting at issue time",
+    "center": {
+      "latitude": 47.2184,
+      "longitude": -1.5536
+    },
+    "radii_km": {
+      "local": 75,
+      "regional": 200
+    },
+    "validation_days": 90,
+    "evaluation_windows": [
+      {
+        "name": "cv_2025_spring",
+        "start": "2025-01-01",
+        "end": "2025-05-01"
+      },
+      {
+        "name": "cv_2025_summer",
+        "start": "2025-05-01",
+        "end": "2025-09-01"
+      },
+      {
+        "name": "cv_2025_autumn",
+        "start": "2025-09-01",
+        "end": "2026-01-01"
+      },
+      {
+        "name": "test_2026",
+        "start": "2026-01-01",
+        "end": "2026-09-24"
+      }
+    ],
+    "extreme_change_threshold_c": 4.0,
+    "warm_quantile_train_only": 0.9,
+    "random_state": 42,
+    "xgboost": {
+      "objective": "reg:squarederror",
+      "tree_method": "hist",
+      "n_estimators": 1000,
+      "learning_rate": 0.03,
+      "max_depth": 3,
+      "min_child_weight": 5,
+      "subsample": 0.8,
+      "colsample_bytree": 0.8,
+      "reg_alpha": 0.1,
+      "reg_lambda": 5.0,
+      "n_jobs": 2,
+      "random_state": 42
+    },
+    "early_stopping_rounds": 50,
+    "references": [
+      "https://open-meteo.com/en/docs/historical-weather-api",
+      "https://scikit-learn.org/stable/modules/cross_validation.html",
+      "https://xgboost.readthedocs.io/en/stable/tutorials/param_tuning.html"
+    ]
+  },
+  "rows": 215352,
+  "sha256": "73d4448691e9e73aead81c3d3887105449aadb86d41bb59a8ab875bc904232ef",
+  "points": [
+    {
+      "point": "center",
+      "latitude": 47.2184,
+      "longitude": -1.5536,
+      "radius_km": 0,
+      "actual_latitude": 47.25,
+      "actual_longitude": -1.5
+    },
+    {
+      "point": "local_north",
+      "latitude": 47.89289027279341,
+      "longitude": -1.5536,
+      "radius_km": 75,
+      "actual_latitude": 48.0,
+      "actual_longitude": -1.5
+    },
+    {
+      "point": "local_east",
+      "latitude": 47.214110168909045,
+      "longitude": -0.5605960308905809,
+      "radius_km": 75,
+      "actual_latitude": 47.25,
+      "actual_longitude": -0.5
+    },
+    {
+      "point": "local_south",
+      "latitude": 46.543909727206604,
+      "longitude": -1.5535999999999999,
+      "radius_km": 75,
+      "actual_latitude": 46.5,
+      "actual_longitude": -1.5
+    },
+    {
+      "point": "local_west",
+      "latitude": 47.214110168909045,
+      "longitude": -2.5466039691094196,
+      "radius_km": 75,
+      "actual_latitude": 47.25,
+      "actual_longitude": -2.5
+    },
+    {
+      "point": "regional_north",
+      "latitude": 49.01704072744908,
+      "longitude": -1.5536,
+      "radius_km": 200,
+      "actual_latitude": 49.0,
+      "actual_longitude": -1.5
+    },
+    {
+      "point": "regional_east",
+      "latitude": 47.18790422176139,
+      "longitude": 1.0935385434814444,
+      "radius_km": 200,
+      "actual_latitude": 47.25,
+      "actual_longitude": 1.0
+    },
+    {
+      "point": "regional_south",
+      "latitude": 45.41975927255092,
+      "longitude": -1.5535999999999996,
+      "radius_km": 200,
+      "actual_latitude": 45.5,
+      "actual_longitude": -1.5
+    },
+    {
+      "point": "regional_west",
+      "latitude": 47.18790422176139,
+      "longitude": -4.200738543481444,
+      "radius_km": 200,
+      "actual_latitude": 47.25,
+      "actual_longitude": -4.25
+    }
+  ],
+  "chunks": [
+    {
+      "point": "center",
+      "start": "2024-01-01",
+      "end": "2024-12-31",
+      "cache_sha256": "91eb2e2259dee39c694ec04f4ccead88a63cd2e4e4078a8a383ad170c92c197d",
+      "rows": 8784
+    },
+    {
+      "point": "center",
+      "start": "2025-01-01",
+      "end": "2025-12-31",
+      "cache_sha256": "b811c3b634255f786cf4716d6852c8b3acacd0cc3059d438cb1504969f030120",
+      "rows": 8760
+    },
+    {
+      "point": "center",
+      "start": "2026-01-01",
+      "end": "2026-09-23",
+      "cache_sha256": "c86892077f878b6c75e5e293634cc4fb1d1b6a5ced0419f82ed9346b77394929",
+      "rows": 6384
+    },
+    {
+      "point": "local_north",
+      "start": "2024-01-01",
+      "end": "2024-12-31",
+      "cache_sha256": "333f5d7e53ac95ac19fe19785897c1fa33b77cf4fa1e8cc0cfc4ad6729469ab6",
+      "rows": 8784
+    },
+    {
+      "point": "local_north",
+      "start": "2025-01-01",
+      "end": "2025-12-31",
+      "cache_sha256": "0f5ab03a841d676127442e036ada3d6ee7fd9fee09f7f83c802fca71bfc65244",
+      "rows": 8760
+    },
+    {
+      "point": "local_north",
+      "start": "2026-01-01",
+      "end": "2026-09-23",
+      "cache_sha256": "54615704936446aabb6b911f6a514624555cc3e337ad03a8ee396e654180eca0",
+      "rows": 6384
+    },
+    {
+      "point": "local_east",
+      "start": "2024-01-01",
+      "end": "2024-12-31",
+      "cache_sha256": "5b6b7e04cf16eb17f6b4f0e650d4670b065b6362ae8eb07a0ff34bcdcebcabc3",
+      "rows": 8784
+    },
+    {
+      "point": "local_east",
+      "start": "2025-01-01",
+      "end": "2025-12-31",
+      "cache_sha256": "4bfda9a5eeae76cbec4a0326ea0ce4c188d5f2d898c929c57dc22fd957b8850e",
+      "rows": 8760
+    },
+    {
+      "point": "local_east",
+      "start": "2026-01-01",
+      "end": "2026-09-23",
+      "cache_sha256": "82058a5ff1917381413f539f89dce438fb071ea8bc6bfa8cb1994becb94b0013",
+      "rows": 6384
+    },
+    {
+      "point": "local_south",
+      "start": "2024-01-01",
+      "end": "2024-12-31",
+      "cache_sha256": "8e79df2ceaea947ba22fd92c5abe2f6728d97334ff999b2faca4ea512b6a4d52",
+      "rows": 8784
+    },
+    {
+      "point": "local_south",
+      "start": "2025-01-01",
+      "end": "2025-12-31",
+      "cache_sha256": "87cae38a4d81cd78a591281c190e11c48f4152215cda82823a036e243aa922b0",
+      "rows": 8760
+    },
+    {
+      "point": "local_south",
+      "start": "2026-01-01",
+      "end": "2026-09-23",
+      "cache_sha256": "23d1027b6d8cc5f5ded2d63976d7b414c9c4176a176ae7e00a040ed6e8459533",
+      "rows": 6384
+    },
+    {
+      "point": "local_west",
+      "start": "2024-01-01",
+      "end": "2024-12-31",
+      "cache_sha256": "302b9e64ff29ad200a8a44264c16d0caf4fdac4c5025ee8b64b6d5fe366ea745",
+      "rows": 8784
+    },
+    {
+      "point": "local_west",
+      "start": "2025-01-01",
+      "end": "2025-12-31",
+      "cache_sha256": "219c8883a086243177e6bb4eca0d2fccf2e9c2292ec2c7b0ef882f71223d5f48",
+      "rows": 8760
+    },
+    {
+      "point": "local_west",
+      "start": "2026-01-01",
+      "end": "2026-09-23",
+      "cache_sha256": "0879003874a87b01ba6971ee68e47cc3c4e1b7ba73b453d2802da1e60f1293cb",
+      "rows": 6384
+    },
+    {
+      "point": "regional_north",
+      "start": "2024-01-01",
+      "end": "2024-12-31",
+      "cache_sha256": "fc202d94474f9de9c50cdfa17f29fed662bcb6de7e1a959e3e1b094ac8ae810f",
+      "rows": 8784
+    },
+    {
+      "point": "regional_north",
+      "start": "2025-01-01",
+      "end": "2025-12-31",
+      "cache_sha256": "55632406f969ed024815042a826c892a164c0217a8e25cb61538725aee7b7602",
+      "rows": 8760
+    },
+    {
+      "point": "regional_north",
+      "start": "2026-01-01",
+      "end": "2026-09-23",
+      "cache_sha256": "a3b7de202fc9b68cc0e017d72709d1996f2ed1e1141e9e859f7bbf1363fa82e2",
+      "rows": 6384
+    },
+    {
+      "point": "regional_east",
+      "start": "2024-01-01",
+      "end": "2024-12-31",
+      "cache_sha256": "7d11e037d3c2cb49a62d6865cdc7a0207605b87054a6015c70fbec2843ec03cb",
+      "rows": 8784
+    },
+    {
+      "point": "regional_east",
+      "start": "2025-01-01",
+      "end": "2025-12-31",
+      "cache_sha256": "9692c856a4dc8e954dbc14c3800e9a614f8876ee73c987584222a4f874bdb732",
+      "rows": 8760
+    },
+    {
+      "point": "regional_east",
+      "start": "2026-01-01",
+      "end": "2026-09-23",
+      "cache_sha256": "0fe9697b36e3a3864dc8a280dfaa6b23d15ee0011e7237ebfbe9fc8e9020fbe1",
+      "rows": 6384
+    },
+    {
+      "point": "regional_south",
+      "start": "2024-01-01",
+      "end": "2024-12-31",
+      "cache_sha256": "e622dc3823071b60b85db6950a59788f7354e4b2bc5126abe9e7f52d427bb70d",
+      "rows": 8784
+    },
+    {
+      "point": "regional_south",
+      "start": "2025-01-01",
+      "end": "2025-12-31",
+      "cache_sha256": "ac7e52a520d2841966d873c03c5e440a0eb0a8ce6bfa842e32f524ab762679ea",
+      "rows": 8760
+    },
+    {
+      "point": "regional_south",
+      "start": "2026-01-01",
+      "end": "2026-09-23",
+      "cache_sha256": "d32bb6e7c968eaa47327e5b1f51f163652602a91b88f6c7cfb974a599f5619d7",
+      "rows": 6384
+    },
+    {
+      "point": "regional_west",
+      "start": "2024-01-01",
+      "end": "2024-12-31",
+      "cache_sha256": "4971813b92e6da4bcf3058428f28ebb6bdbad5957a6b8169452bf5edf48df9aa",
+      "rows": 8784
+    },
+    {
+      "point": "regional_west",
+      "start": "2025-01-01",
+      "end": "2025-12-31",
+      "cache_sha256": "3327cd0a0b90bc85375a6fbe6c0f4ab10410424ac309ae44bd345bd0b5c59cee",
+      "rows": 8760
+    },
+    {
+      "point": "regional_west",
+      "start": "2026-01-01",
+      "end": "2026-09-23",
+      "cache_sha256": "2da7c4f5f60b403f2ae5c52ec678a1a19f64d33d148472a81563f34c6abd3330",
+      "rows": 6384
+    }
+  ]
+}
