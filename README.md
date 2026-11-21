@@ -1,65 +1,48 @@
 # Heatwave Lab
 
-```text
-heatwave-lab/
-├── data/          # Hourly and daily weather CSVs
-├── experiments/   # Your notebook and its saved plots
-├── scripts/       # Your data collection script
-└── notes/         # Your existing notes and PDFs
-```
+Le notebook historique `experiments/heatwave_linear_regression.ipynb` est conservé.
+Les deux nouvelles expériences sont autonomes : leur code est écrit directement
+dans les cellules, sans module d'expérimentation à suivre ailleurs.
 
-Your original Nix environment and Git setup stay at the project root.
+| Notebook | Comparaison |
+|---|---|
+| [1 — Jour de l'année et saison](experiments/heatwave_xgboost_calendar.ipynb) | XGBoost météo seule contre météo + calendrier |
+| [2 — Quatre voisins](experiments/heatwave_xgboost_neighbors.ipynb) | Modèle temporel contre le même modèle avec le voisinage |
 
-## Continue your experiments
+Le deuxième notebook ajoute quatre points au nord, au sud, à l'est et à l'ouest,
+à environ 75–85 km. Il utilise leurs températures, pressions et vents, les écarts
+de température avec Nantes, et deux gradients de pression en hPa/km.
+Les composantes du vent u et v sont calculées heure par heure puis moyennées par jour.
 
-From `heatwave-lab/`:
+Les deux expériences ont la même cible : Tmax du lendemain. Toutes les entrées
+viennent du jour courant ou de son calendrier connu à l'avance. Les journées
+sont en UTC ; la prévision suppose les observations du jour terminées.
+La séparation est chronologique : les premiers 80 % des jours pour apprendre,
+les derniers 20 % pour évaluer. Les paramètres sont identiques et fixés.
+La persistance (Tmax demain = Tmax aujourd'hui) sert de référence.
+Les dates du test ayant déjà été examinées, les résultats restent exploratoires.
+ERA5 est une réanalyse disponible avec retard, pas une prévision en temps réel.
+
+## Utilisation
+
+Depuis la racine du projet :
 
 ```bash
 nix develop
+python scripts/download_four_neighbors.py
 jupyter lab experiments
 ```
 
-Open `heatwave_linear_regression.ipynb`. It reads from `../data/` and saves
-plots alongside the notebook. Duplicate the notebook when you want to try a
-separate experiment.
+Choisir le noyau **Python (STASC Nix)** et exécuter les cellules dans l'ordre.
+La collecte crée `data/weather_five_points_daily.csv`, commun aux deux notebooks,
+sans modifier les anciens CSV. Les données et les caches restent ignorés par Git.
 
-Your collection script is in `scripts/heatwave_data.py`; it now saves CSVs
-in `data/`. Only file paths were adjusted; the existing model logic is unchanged.
-CSV files and local caches are ignored by Git.
-
-## Experiments
-
-- `experiments/heatwave_linear_regression.ipynb`: corrected linear baselines,
-  Random Forest and histogram gradient boosting, evaluated on identical test dates.
-  Scaling is fitted inside each linear pipeline on training data only;
-  persistence and target temperatures stay in degrees Celsius. Feature ablation
-  uses an internal validation period. Simple linear plots are saved in
-  `experiments/plots_linear/`; enriched linear plots remain in `experiments/plots/`.
-- `experiments/heatwave_xgboost_calendar.ipynb`: XGBoost with weather and past
-  observations, compared with cyclic month encoding and meteorological seasons.
-  All variants share a chronological 60/20/20 train/validation/test split.
-  Early stopping and variant selection use validation only; final models are
-  refitted before test evaluation. Figures are in `experiments/plots_xgboost_calendar/`.
-  Geographic neighbors are reserved for the next experiment.
-
-Both notebooks use the same preparation functions in `scripts/experiment_utils.py`:
-targets match the exact next calendar day, historical features match exact past
-days, and ambiguous duplicate or multiple-location data are rejected. Training
-targets are strictly earlier than the next period's first predictor date.
-The CSV must contain the single Nantes ERA5 cell; it is not modified by training.
-
-XGBoost is included in the pinned Nix environment. After changing `flake.nix`,
-restart `nix develop` and the notebook kernel **Python (STASC Nix)**.
-To rerun both notebooks and the date checks from the project root:
+Pour exécuter les deux notebooks sans ouvrir Jupyter :
 
 ```bash
-nix develop --command python -m unittest discover -s tests -v
 nix develop --command python scripts/execute_notebooks.py \
-  experiments/heatwave_linear_regression.ipynb \
-  experiments/heatwave_xgboost_calendar.ipynb
+  experiments/heatwave_xgboost_calendar.ipynb \
+  experiments/heatwave_xgboost_neighbors.ipynb
 ```
 
-The experiments predict next-day Tmax after the end of the observation day,
-using retrospective reanalysis data. They do not yet evaluate heatwave events
-or operational data availability. Previously inspected test dates provide
-exploratory evidence; confirmation needs a future period not used during development.
+Les résultats et graphiques sont enregistrés dans les notebooks.
