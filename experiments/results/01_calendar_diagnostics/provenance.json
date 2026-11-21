@@ -1,0 +1,549 @@
+{
+  "experiment": "01_calendar_diagnostics",
+  "selected_on_cv": "xgb_month_cycle",
+  "protocol": {
+    "version": 1,
+    "start_date": "2024-01-01",
+    "end_date": "2026-09-23",
+    "timezone": "UTC",
+    "issue_hour_utc": 0,
+    "target": "maximum hourly 2m temperature over the UTC day starting at issue time",
+    "center": {
+      "latitude": 47.2184,
+      "longitude": -1.5536
+    },
+    "radii_km": {
+      "local": 75,
+      "regional": 200
+    },
+    "validation_days": 90,
+    "evaluation_windows": [
+      {
+        "name": "cv_2025_spring",
+        "start": "2025-01-01",
+        "end": "2025-05-01"
+      },
+      {
+        "name": "cv_2025_summer",
+        "start": "2025-05-01",
+        "end": "2025-09-01"
+      },
+      {
+        "name": "cv_2025_autumn",
+        "start": "2025-09-01",
+        "end": "2026-01-01"
+      },
+      {
+        "name": "test_2026",
+        "start": "2026-01-01",
+        "end": "2026-09-24"
+      }
+    ],
+    "extreme_change_threshold_c": 4.0,
+    "warm_quantile_train_only": 0.9,
+    "random_state": 42,
+    "xgboost": {
+      "objective": "reg:squarederror",
+      "tree_method": "hist",
+      "n_estimators": 1000,
+      "learning_rate": 0.03,
+      "max_depth": 3,
+      "min_child_weight": 5,
+      "subsample": 0.8,
+      "colsample_bytree": 0.8,
+      "reg_alpha": 0.1,
+      "reg_lambda": 5.0,
+      "n_jobs": 2,
+      "random_state": 42
+    },
+    "early_stopping_rounds": 50,
+    "references": [
+      "https://open-meteo.com/en/docs/historical-weather-api",
+      "https://scikit-learn.org/stable/modules/cross_validation.html",
+      "https://xgboost.readthedocs.io/en/stable/tutorials/param_tuning.html"
+    ]
+  },
+  "data_file": "data/research_v1/center_hourly.csv",
+  "data_sha256": "4879db957297031d43bba4671b32ad830c9c0d35af1af5c05c0e0e68e306792d",
+  "code_sha256": {
+    "research_evaluation.py": "188acb60e348c5f6c74a2b831fe64241cc1fa860cd3fb0d657ba8a44a6d07283",
+    "research_features.py": "7f9303717728a7435678b8f09549b85eff17bb30e878c07c1f0c0c851c680fda"
+  },
+  "feature_sets": {
+    "xgb_daily": {
+      "columns": [
+        "temperature_max",
+        "temperature_min",
+        "temperature_mean",
+        "relative_humidity_mean",
+        "dew_point_mean",
+        "pressure_msl_mean",
+        "cloud_cover_mean",
+        "wind_speed_mean",
+        "wind_speed_max",
+        "wind_dir_sin_mean",
+        "wind_dir_cos_mean",
+        "precipitation_sum",
+        "soil_moisture_mean",
+        "shortwave_radiation_sum_MJ_m2",
+        "tmax_lag1",
+        "tmax_lag2",
+        "delta_pressure",
+        "delta_humidity"
+      ]
+    },
+    "xgb_month_raw": {
+      "columns": [
+        "temperature_max",
+        "temperature_min",
+        "temperature_mean",
+        "relative_humidity_mean",
+        "dew_point_mean",
+        "pressure_msl_mean",
+        "cloud_cover_mean",
+        "wind_speed_mean",
+        "wind_speed_max",
+        "wind_dir_sin_mean",
+        "wind_dir_cos_mean",
+        "precipitation_sum",
+        "soil_moisture_mean",
+        "shortwave_radiation_sum_MJ_m2",
+        "tmax_lag1",
+        "tmax_lag2",
+        "delta_pressure",
+        "delta_humidity",
+        "calendar_month"
+      ]
+    },
+    "xgb_day_raw": {
+      "columns": [
+        "temperature_max",
+        "temperature_min",
+        "temperature_mean",
+        "relative_humidity_mean",
+        "dew_point_mean",
+        "pressure_msl_mean",
+        "cloud_cover_mean",
+        "wind_speed_mean",
+        "wind_speed_max",
+        "wind_dir_sin_mean",
+        "wind_dir_cos_mean",
+        "precipitation_sum",
+        "soil_moisture_mean",
+        "shortwave_radiation_sum_MJ_m2",
+        "tmax_lag1",
+        "tmax_lag2",
+        "delta_pressure",
+        "delta_humidity",
+        "calendar_day_of_year"
+      ]
+    },
+    "xgb_month_cycle": {
+      "columns": [
+        "temperature_max",
+        "temperature_min",
+        "temperature_mean",
+        "relative_humidity_mean",
+        "dew_point_mean",
+        "pressure_msl_mean",
+        "cloud_cover_mean",
+        "wind_speed_mean",
+        "wind_speed_max",
+        "wind_dir_sin_mean",
+        "wind_dir_cos_mean",
+        "precipitation_sum",
+        "soil_moisture_mean",
+        "shortwave_radiation_sum_MJ_m2",
+        "tmax_lag1",
+        "tmax_lag2",
+        "delta_pressure",
+        "delta_humidity",
+        "calendar_month_sin",
+        "calendar_month_cos"
+      ]
+    },
+    "xgb_day_cycle": {
+      "columns": [
+        "temperature_max",
+        "temperature_min",
+        "temperature_mean",
+        "relative_humidity_mean",
+        "dew_point_mean",
+        "pressure_msl_mean",
+        "cloud_cover_mean",
+        "wind_speed_mean",
+        "wind_speed_max",
+        "wind_dir_sin_mean",
+        "wind_dir_cos_mean",
+        "precipitation_sum",
+        "soil_moisture_mean",
+        "shortwave_radiation_sum_MJ_m2",
+        "tmax_lag1",
+        "tmax_lag2",
+        "delta_pressure",
+        "delta_humidity",
+        "calendar_day_sin",
+        "calendar_day_cos"
+      ]
+    },
+    "xgb_season": {
+      "columns": [
+        "temperature_max",
+        "temperature_min",
+        "temperature_mean",
+        "relative_humidity_mean",
+        "dew_point_mean",
+        "pressure_msl_mean",
+        "cloud_cover_mean",
+        "wind_speed_mean",
+        "wind_speed_max",
+        "wind_dir_sin_mean",
+        "wind_dir_cos_mean",
+        "precipitation_sum",
+        "soil_moisture_mean",
+        "shortwave_radiation_sum_MJ_m2",
+        "tmax_lag1",
+        "tmax_lag2",
+        "delta_pressure",
+        "delta_humidity",
+        "calendar_winter",
+        "calendar_spring",
+        "calendar_summer",
+        "calendar_autumn"
+      ]
+    },
+    "xgb_year": {
+      "columns": [
+        "temperature_max",
+        "temperature_min",
+        "temperature_mean",
+        "relative_humidity_mean",
+        "dew_point_mean",
+        "pressure_msl_mean",
+        "cloud_cover_mean",
+        "wind_speed_mean",
+        "wind_speed_max",
+        "wind_dir_sin_mean",
+        "wind_dir_cos_mean",
+        "precipitation_sum",
+        "soil_moisture_mean",
+        "shortwave_radiation_sum_MJ_m2",
+        "tmax_lag1",
+        "tmax_lag2",
+        "delta_pressure",
+        "delta_humidity",
+        "calendar_year"
+      ]
+    },
+    "ridge_daily": {
+      "columns": [
+        "temperature_max",
+        "temperature_min",
+        "temperature_mean",
+        "relative_humidity_mean",
+        "dew_point_mean",
+        "pressure_msl_mean",
+        "cloud_cover_mean",
+        "wind_speed_mean",
+        "wind_speed_max",
+        "wind_dir_sin_mean",
+        "wind_dir_cos_mean",
+        "precipitation_sum",
+        "soil_moisture_mean",
+        "shortwave_radiation_sum_MJ_m2",
+        "tmax_lag1",
+        "tmax_lag2",
+        "delta_pressure",
+        "delta_humidity"
+      ],
+      "algorithm": "ridge"
+    }
+  },
+  "model_fits": [
+    {
+      "window": "cv_2025_spring",
+      "variant": "xgb_daily",
+      "features": 18,
+      "algorithm": "xgboost",
+      "target": "direct",
+      "weighting": "uniform",
+      "trees": 174
+    },
+    {
+      "window": "cv_2025_spring",
+      "variant": "xgb_month_raw",
+      "features": 19,
+      "algorithm": "xgboost",
+      "target": "direct",
+      "weighting": "uniform",
+      "trees": 92
+    },
+    {
+      "window": "cv_2025_spring",
+      "variant": "xgb_day_raw",
+      "features": 19,
+      "algorithm": "xgboost",
+      "target": "direct",
+      "weighting": "uniform",
+      "trees": 81
+    },
+    {
+      "window": "cv_2025_spring",
+      "variant": "xgb_month_cycle",
+      "features": 20,
+      "algorithm": "xgboost",
+      "target": "direct",
+      "weighting": "uniform",
+      "trees": 138
+    },
+    {
+      "window": "cv_2025_spring",
+      "variant": "xgb_day_cycle",
+      "features": 20,
+      "algorithm": "xgboost",
+      "target": "direct",
+      "weighting": "uniform",
+      "trees": 186
+    },
+    {
+      "window": "cv_2025_spring",
+      "variant": "xgb_season",
+      "features": 22,
+      "algorithm": "xgboost",
+      "target": "direct",
+      "weighting": "uniform",
+      "trees": 125
+    },
+    {
+      "window": "cv_2025_spring",
+      "variant": "xgb_year",
+      "features": 19,
+      "algorithm": "xgboost",
+      "target": "direct",
+      "weighting": "uniform",
+      "trees": 127
+    },
+    {
+      "window": "cv_2025_spring",
+      "variant": "ridge_daily",
+      "features": 18,
+      "algorithm": "ridge",
+      "alpha": 10.0,
+      "trees": null
+    },
+    {
+      "window": "cv_2025_summer",
+      "variant": "xgb_daily",
+      "features": 18,
+      "algorithm": "xgboost",
+      "target": "direct",
+      "weighting": "uniform",
+      "trees": 175
+    },
+    {
+      "window": "cv_2025_summer",
+      "variant": "xgb_month_raw",
+      "features": 19,
+      "algorithm": "xgboost",
+      "target": "direct",
+      "weighting": "uniform",
+      "trees": 170
+    },
+    {
+      "window": "cv_2025_summer",
+      "variant": "xgb_day_raw",
+      "features": 19,
+      "algorithm": "xgboost",
+      "target": "direct",
+      "weighting": "uniform",
+      "trees": 168
+    },
+    {
+      "window": "cv_2025_summer",
+      "variant": "xgb_month_cycle",
+      "features": 20,
+      "algorithm": "xgboost",
+      "target": "direct",
+      "weighting": "uniform",
+      "trees": 222
+    },
+    {
+      "window": "cv_2025_summer",
+      "variant": "xgb_day_cycle",
+      "features": 20,
+      "algorithm": "xgboost",
+      "target": "direct",
+      "weighting": "uniform",
+      "trees": 203
+    },
+    {
+      "window": "cv_2025_summer",
+      "variant": "xgb_season",
+      "features": 22,
+      "algorithm": "xgboost",
+      "target": "direct",
+      "weighting": "uniform",
+      "trees": 176
+    },
+    {
+      "window": "cv_2025_summer",
+      "variant": "xgb_year",
+      "features": 19,
+      "algorithm": "xgboost",
+      "target": "direct",
+      "weighting": "uniform",
+      "trees": 166
+    },
+    {
+      "window": "cv_2025_summer",
+      "variant": "ridge_daily",
+      "features": 18,
+      "algorithm": "ridge",
+      "alpha": 10.0,
+      "trees": null
+    },
+    {
+      "window": "cv_2025_autumn",
+      "variant": "xgb_daily",
+      "features": 18,
+      "algorithm": "xgboost",
+      "target": "direct",
+      "weighting": "uniform",
+      "trees": 476
+    },
+    {
+      "window": "cv_2025_autumn",
+      "variant": "xgb_month_raw",
+      "features": 19,
+      "algorithm": "xgboost",
+      "target": "direct",
+      "weighting": "uniform",
+      "trees": 337
+    },
+    {
+      "window": "cv_2025_autumn",
+      "variant": "xgb_day_raw",
+      "features": 19,
+      "algorithm": "xgboost",
+      "target": "direct",
+      "weighting": "uniform",
+      "trees": 339
+    },
+    {
+      "window": "cv_2025_autumn",
+      "variant": "xgb_month_cycle",
+      "features": 20,
+      "algorithm": "xgboost",
+      "target": "direct",
+      "weighting": "uniform",
+      "trees": 486
+    },
+    {
+      "window": "cv_2025_autumn",
+      "variant": "xgb_day_cycle",
+      "features": 20,
+      "algorithm": "xgboost",
+      "target": "direct",
+      "weighting": "uniform",
+      "trees": 310
+    },
+    {
+      "window": "cv_2025_autumn",
+      "variant": "xgb_season",
+      "features": 22,
+      "algorithm": "xgboost",
+      "target": "direct",
+      "weighting": "uniform",
+      "trees": 488
+    },
+    {
+      "window": "cv_2025_autumn",
+      "variant": "xgb_year",
+      "features": 19,
+      "algorithm": "xgboost",
+      "target": "direct",
+      "weighting": "uniform",
+      "trees": 385
+    },
+    {
+      "window": "cv_2025_autumn",
+      "variant": "ridge_daily",
+      "features": 18,
+      "algorithm": "ridge",
+      "alpha": 10.0,
+      "trees": null
+    },
+    {
+      "window": "test_2026",
+      "variant": "xgb_daily",
+      "features": 18,
+      "algorithm": "xgboost",
+      "target": "direct",
+      "weighting": "uniform",
+      "trees": 115
+    },
+    {
+      "window": "test_2026",
+      "variant": "xgb_month_raw",
+      "features": 19,
+      "algorithm": "xgboost",
+      "target": "direct",
+      "weighting": "uniform",
+      "trees": 106
+    },
+    {
+      "window": "test_2026",
+      "variant": "xgb_day_raw",
+      "features": 19,
+      "algorithm": "xgboost",
+      "target": "direct",
+      "weighting": "uniform",
+      "trees": 106
+    },
+    {
+      "window": "test_2026",
+      "variant": "xgb_month_cycle",
+      "features": 20,
+      "algorithm": "xgboost",
+      "target": "direct",
+      "weighting": "uniform",
+      "trees": 119
+    },
+    {
+      "window": "test_2026",
+      "variant": "xgb_day_cycle",
+      "features": 20,
+      "algorithm": "xgboost",
+      "target": "direct",
+      "weighting": "uniform",
+      "trees": 138
+    },
+    {
+      "window": "test_2026",
+      "variant": "xgb_season",
+      "features": 22,
+      "algorithm": "xgboost",
+      "target": "direct",
+      "weighting": "uniform",
+      "trees": 117
+    },
+    {
+      "window": "test_2026",
+      "variant": "xgb_year",
+      "features": 19,
+      "algorithm": "xgboost",
+      "target": "direct",
+      "weighting": "uniform",
+      "trees": 108
+    },
+    {
+      "window": "test_2026",
+      "variant": "ridge_daily",
+      "features": 18,
+      "algorithm": "ridge",
+      "alpha": 10.0,
+      "trees": null
+    }
+  ],
+  "warning": "2026 was previously inspected; results are exploratory, not a prospective independent test."
+}
