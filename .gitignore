@@ -1,0 +1,37 @@
+# Local environments and Nix build outputs
+.direnv/
+.venv/
+venv/
+/result
+/result-*
+
+# Python and tool caches
+__pycache__/
+*.py[cod]
+.cache/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Jupyter autosaves
+.ipynb_checkpoints/
+
+# Local secrets (keep shareable templates)
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+
+# Downloaded weather data
+*.csv
+/data/*
+!/data/.gitkeep
+
+# Editor and operating system files
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
