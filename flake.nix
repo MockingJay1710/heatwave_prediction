@@ -27,6 +27,8 @@
           pandas
           requests
           scikit-learn
+          # datatable is an optional test dependency, broken in this pinned nixpkgs.
+          (xgboost.override { datatable = null; })
 
         ]);
 
