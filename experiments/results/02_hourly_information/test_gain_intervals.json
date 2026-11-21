@@ -1,0 +1,27 @@
+[
+  {
+    "variant":"persistence",
+    "gain_low_C":0.0,
+    "gain_high_C":0.0
+  },
+  {
+    "variant":"ridge_daily",
+    "gain_low_C":-0.1884748447,
+    "gain_high_C":0.0986244609
+  },
+  {
+    "variant":"ridge_daily_hourly",
+    "gain_low_C":-0.1336696841,
+    "gain_high_C":0.2387004753
+  },
+  {
+    "variant":"xgb_daily",
+    "gain_low_C":-1.2337009332,
+    "gain_high_C":-0.1318682924
+  },
+  {
+    "variant":"xgb_daily_hourly",
+    "gain_low_C":-0.8102643364,
+    "gain_high_C":0.1143816829
+  }
+]
