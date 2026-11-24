@@ -33,7 +33,6 @@ python scripts/download_four_neighbors.py
 jupyter lab experiments
 ```
 
-Choisir le noyau **Python (STASC Nix)** et exécuter les cellules dans l'ordre.
 La collecte crée `data/weather_five_points_daily.csv`, commun aux deux notebooks,
 sans modifier les anciens CSV. Les données et les caches restent ignorés par Git.
 
